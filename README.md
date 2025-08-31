@@ -11,6 +11,9 @@ Vous pourrez cliquez sur chacune des bulles représentant un micro-service, visu
 
 Par exemple, vous verrez le micro-service *rag-ctn*, son code sera accessible dans 6-RAG/rag-ctn du repostery.
 
+Voici les micro-services pour vous aider : 
+
+<img width="455" height="471" alt="Capture d’écran du 2025-08-31 23-24-04" src="https://github.com/user-attachments/assets/5e950af1-3512-4e4b-bfc9-1afafa1732af" />
 
 ## Objectifs Pédagogiques
 
@@ -21,4 +24,5 @@ Cette application s'appuie sur **2 objectifs pédagogiques** :
 
 Allez **découvrir et tester cette application** : [https://sirr.express](https://sirr.express)  
 (_sirr_ signifie **secret** en arabe, et j'ai choisi l'extension **.express** pour évoquer la **rapidité** et la **fluidité** de la conversation).
+
 

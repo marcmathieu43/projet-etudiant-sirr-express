@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+
+package message;
+
+option go_package = "conversation-global-ctn/message-ctn/proto;message";
+
+import "google/protobuf/wrappers.proto";
+
+
+
+service gestion_message {
+  rpc PostMessage (PostMessageRequest) returns (PostMessageReply) {}
+  rpc GetAllMessages (GetAllMessagesRequest) returns (GetAllMessagesReply) {}
+}
+
+
+message Message {
+  string id = 1;
+  string conversation_id = 2;   
+  string content = 3;
+  string nonce = 4;
+  string tag_element = 5;
+  string created_at = 6;
+  string lien = 7;
+}
+
+message PostMessageRequest {
+  string conversation_id = 1;
+  string content = 2;
+  string nonce = 3;
+  string tag_element = 4; 
+  string created_at = 5;
+  string reply_to_element_id = 6; 
+  string lien = 7;
+}
+
+message PostMessageReply {
+  string id = 1;
+  string conversation_id = 2;
+  string content = 3;
+  string nonce = 4;
+  string tag_element = 5; 
+  string created_at = 6;
+  string reply_to_element_id = 7; 
+  string lien = 8;
+}
+
+
+
+message GetAllMessagesRequest {
+  string conversation_id = 1;
+}
+
+message GetAllMessagesReply {
+  repeated Message messages = 1;
+}
+

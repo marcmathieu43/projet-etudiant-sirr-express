@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package autorisation;
+
+option go_package = "gateway-ctn/proto/autorisation";
+
+service AutorisationService {
+  rpc VerifieEtIncrementeToken (VerifieTokenRequest) returns (VerifieTokenReponse);
+}
+
+message VerifieTokenRequest {
+  string token = 1;
+}
+
+message VerifieTokenReponse {
+  bool ok = 1;
+  int64 nb_creation = 2;
+}

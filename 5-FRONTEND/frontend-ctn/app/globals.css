@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Nata+Sans:wght@100..900&display=swap');
+@import "tailwindcss";
+
+
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+
+  --cle: #131331c4;
+
+  --background-cle: linear-gradient(180deg, #88b2cb4a, #a1e1ca6b);
+
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/*@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+*/
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  height: 100vh;
+}
+
+.message-left {
+  position: relative;
+  background: #d0ebff;
+  color: #000;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  max-width: 70%;
+}
+
+/* Pointe à gauche */
+.message-left::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: -10px;
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 10px solid #d0ebff;
+}
+
+.message-right {
+  position: relative;
+  background: #e9ecef;
+  color: #000;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  max-width: 70%;
+}
+
+/* Pointe à droite */
+.message-right::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  right: -10px;
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 10px solid #e9ecef;
+}
+
+
+.lexend-light {
+  font-family: "Lexend", sans-serif;
+  font-weight: 300;
+}
+
+.lexend-regular {
+  font-family: "Lexend", sans-serif;
+  font-weight: 400;
+}
+
+.lexend-bold {
+  font-family: "Lexend", sans-serif;
+  font-weight: 700;
+}
+
+.nata-sans-light {
+  font-family: "Nata Sans", sans-serif;
+  font-weight: 300;
+}
+
+.nata-sans-regular {
+  font-family: "Nata Sans", sans-serif;
+  font-weight: 400;
+}
+
+.nata-sans-bold {
+  font-family: "Nata Sans", sans-serif;
+  font-weight: 700;
+}
+
+.loading-spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid #25728a;
+  border-top: 3px solid #324c53;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.hover:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+
+.hover:hover span {
+  text-decoration: none; 
+}

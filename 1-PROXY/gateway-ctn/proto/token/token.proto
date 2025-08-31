@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package token;
+
+option go_package = "gateway-ctn/proto/token";
+
+service TokenService {
+  rpc RegisterToken (RegisterTokenRequest) returns (RegisterTokenResponse);
+}
+
+message RegisterTokenRequest {
+  string token = 1;
+}
+
+message RegisterTokenResponse {
+  string message = 1;
+}

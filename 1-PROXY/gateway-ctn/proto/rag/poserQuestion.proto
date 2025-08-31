@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package rag;
+
+option go_package = "gateway-ctn/proto/rag";
+
+service TokenService {
+  rpc PoserQuestion (PoserQuestionRequest) returns (PoserQuestionResponse);
+}
+
+message Message {
+  string id = 1;
+  string content = 2;
+}
+
+message PoserQuestionRequest {
+  string token = 1;
+  repeated Message messages = 2;
+  string question = 3; 
+}
+
+message PoserQuestionResponse {
+  repeated Message retrieved_messages = 1; 
+  string reply = 2;                        
+}

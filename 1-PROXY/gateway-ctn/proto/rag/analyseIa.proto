@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package rag;
+
+option go_package = "gateway-ctn/proto/rag";
+
+service AnalyseIa {
+  rpc AnalyseIa (AnalyseIaRequest) returns (AnalyseIaResponse);
+}
+
+message MessageIa {
+  string id = 1;
+  string content = 2;
+}
+
+message TypePourcentage {
+  string type = 1;
+  int32 pourcentage = 2;
+}
+
+message MessageIaReponse {
+  string id = 1;
+  bool sousEntendu = 2;
+  int32 pourcentageSousEntendu = 3;
+  repeated TypePourcentage types = 4;
+}
+
+
+message AnalyseIaRequest {
+  string token = 1;
+  repeated MessageIa messages = 2;
+}
+
+message ClassementItem {
+  string type = 1;
+  int32 valeur = 2;
+}
+
+message AnalyseIaResponse {
+  repeated MessageIaReponse analyse_messages = 1;  
+  repeated ClassementItem classement = 2;                
+}

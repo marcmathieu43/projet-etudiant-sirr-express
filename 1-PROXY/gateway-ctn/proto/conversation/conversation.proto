@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+
+package conversation;
+
+option go_package = "crud-db-conversation-ctn/proto;conversation";
+
+import "google/protobuf/wrappers.proto";
+
+// On implémente les services CRUD pour la gestion des conversations avec la base postgre
+
+service gestion_conversation {
+  rpc CreateConversation (CreateConversationRequest) returns (CreateConversationReply) {}
+  rpc DeleteConversation (DeleteConversationRequest) returns (DeleteConversationReply) {}
+  rpc UpdateConversation (UpdateConversationRequest) returns (UpdateConversationReply) {}
+  rpc GetConversationById (ConversationIdRequest) returns (ConversationIdResponse) {}
+}
+
+
+message Conversation {
+  string id = 1;
+  string date_creation = 2;   
+  int32 nb_message = 3;
+  int32 acces_occured = 4;
+  string date_expiration = 5;
+  int32 nb_vues_message_default = 6;
+}
+
+message CreateConversationRequest {
+  int32 duree_vie = 1;
+  int32 nb_vues_message_default = 2;
+}
+
+message CreateConversationReply {
+  string id = 1;
+}
+
+message DeleteConversationRequest {
+  string id = 1;
+}
+
+message DeleteConversationReply {
+  bool success = 1;
+}
+
+message UpdateConversationRequest {       // si on veut update que certaines valeurs alors on utilise les wrappers pour mettre des champs nuls pour ceux qu on update pas
+  string id = 1;
+  google.protobuf.Int32Value nbmessage = 2;
+  google.protobuf.Int32Value duree_vie = 3;
+}
+
+message UpdateConversationReply {   // seulement nos champs updatés
+  string id = 1;
+  google.protobuf.Int32Value nbmessage = 2;
+  google.protobuf.Int32Value duree_vie = 3;
+}
+
+message ConversationIdRequest {
+  string id = 1;
+}
+
+message ConversationIdResponse {
+  Conversation conversation = 1;
+}

@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- This file was created with the aha Ansi HTML Adapter. https://github.com/theZiz/aha -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="application/xml+xhtml; charset=UTF-8"/>
+<title>stdin</title>
+</head>
+<body style="color:white; background-color:black">
+<pre>
+.
+├── 1-PROXY
+│   ├── gateway-ctn
+│   │   ├── Dockerfile
+│   │   ├── go.mod
+│   │   ├── go.sum
+│   │   ├── main.go
+│   │   ├── models
+│   │   │   └── json-decoder.go
+│   │   ├── proto
+│   │   │   ├── autorisation
+│   │   │   │   ├── autorisation_grpc.pb.go
+│   │   │   │   ├── autorisation.pb.go
+│   │   │   │   └── autorisation.proto
+│   │   │   ├── conversation
+│   │   │   │   ├── conversation_grpc.pb.go
+│   │   │   │   ├── conversation.pb.go
+│   │   │   │   └── conversation.proto
+│   │   │   ├── message
+│   │   │   │   ├── message_grpc.pb.go
+│   │   │   │   ├── message.pb.go
+│   │   │   │   └── message.proto
+│   │   │   ├── rag
+│   │   │   │   ├── analyseIa_grpc.pb.go
+│   │   │   │   ├── analyseIa.pb.go
+│   │   │   │   ├── analyseIa.proto
+│   │   │   │   ├── poserQuestion_grpc.pb.go
+│   │   │   │   ├── poserQuestion.pb.go
+│   │   │   │   └── poserQuestion.proto
+│   │   │   └── token
+│   │   │       ├── token_grpc.pb.go
+│   │   │       ├── token.pb.go
+│   │   │       └── token.proto
+│   │   ├── redirection
+│   │   │   ├── postgres
+│   │   │   │   ├── crud
+│   │   │   │   │   └── create-conversation.go
+│   │   │   │   └── message
+│   │   │   │       └── post-message.go
+│   │   │   ├── rag
+│   │   │   │   └── poser-question.go
+│   │   │   └── token
+│   │   │       └── register-token-user.go
+│   │   └── utils
+│   │       └── json_utils.go
+│   ├── nginx-reverse-proxy-ctn
+│   │   ├── default.conf
+│   │   └── Dockerfile
+│   └── websocket-ctn
+│       ├── Dockerfile
+│       ├── go.mod
+│       ├── go.sum
+│       ├── main.go
+│       └── proto
+│           └── websocket
+│               ├── websocket_grpc.pb.go
+│               ├── websocket.pb.go
+│               └── websocket.proto
+├── 2-DATA-SERVICE
+│   ├── crud-db-conversation-ctn
+│   │   ├── Dockerfile
+│   │   ├── go.mod
+│   │   ├── go.sum
+│   │   ├── main.go
+│   │   └── proto
+│   │       ├── conversation_grpc.pb.go
+│   │       ├── conversation.pb.go
+│   │       └── conversation.proto
+│   └── message-ctn
+│       ├── Dockerfile
+│       ├── go.mod
+│       ├── go.sum
+│       ├── main.go
+│       └── proto
+│           ├── message
+│           │   ├── message_grpc.pb.go
+│           │   ├── message.pb.go
+│           │   └── message.proto
+│           └── websocket
+│               ├── websocket_grpc.pb.go
+│               ├── websocket.pb.go
+│               └── websocket.proto
+├── 3-UTILISATEURS
+│   ├── user-gestion-ctn
+│   │   ├── Dockerfile
+│   │   ├── go.mod
+│   │   ├── go.sum
+│   │   ├── main.go
+│   │   └── proto
+│   │       ├── token_grpc.pb.go
+│   │       ├── token.pb.go
+│   │       └── token.proto
+│   └── verification-token-ctn
+│       ├── Dockerfile
+│       ├── go.mod
+│       ├── go.sum
+│       ├── main.go
+│       └── proto
+│           ├── autorisation_grpc.pb.go
+│           ├── autorisation.pb.go
+│           └── autorisation.proto
+├── 4-BDD
+│   ├── postgres-ctn
+│   │   └── sql-init.sql
+│   └── redis-ctn
+│       └── Dockerfile
+├── 5-FRONTEND
+│   └── frontend-ctn
+│       ├── app
+│       │   ├── api
+│       │   │   ├── cookies
+│       │   │   │   └── set
+│       │   │   │       └── route.ts
+│       │   │   ├── crud
+│       │   │   │   ├── create-conversation
+│       │   │   │   │   └── route.ts
+│       │   │   │   └── get-conversation
+│       │   │   │       └── route.ts
+│       │   │   ├── messages
+│       │   │   │   ├── get-all-messages
+│       │   │   │   │   └── route.ts
+│       │   │   │   └── post-message
+│       │   │   │       └── route.ts
+│       │   │   └── rag
+│       │   │       ├── analyse-ia
+│       │   │       │   └── route.ts
+│       │   │       └── poser-question
+│       │   │           └── route.ts
+│       │   ├── conversation
+│       │   │   └── [id]
+│       │   │       ├── affichage
+│       │   │       │   ├── PARTIE1ConversationHeader.tsx
+│       │   │       │   ├── PARTIE2ConversationInfo.tsx
+│       │   │       │   ├── PARTIE3Messages.tsx
+│       │   │       │   └── PARTIE4InputClient.tsx
+│       │   │       ├── fonctions
+│       │   │       │   ├── fonctionsConversation.ts
+│       │   │       │   └── fonctionsDate.ts
+│       │   │       ├── page.tsx
+│       │   │       └── types.ts
+│       │   ├── favicon.ico
+│       │   ├── globals.css
+│       │   ├── layout.tsx
+│       │   └── page.tsx
+│       ├── components
+│       │   ├── creation-conversation
+│       │   │   ├── Etape1Parametrage.tsx
+│       │   │   └── Etape2RecuperationCle.tsx
+│       │   ├── PageAccueil.tsx
+│       │   └── svg
+│       │       ├── 1-PROXY
+│       │       │   ├── gateway-ctn
+│       │       │   │   ├── 1-PROXY-gateway-ctn-1-redirections-primaires.svg
+│       │       │   │   ├── 1-PROXY-gateway-ctn-2-exemple-client-gateway.svg
+│       │       │   │   └── 1-PROXY-gateway-ctn-3-fonctions-utiles.svg
+│       │       │   ├── nginx-ctn
+│       │       │   │   └── 1-PROXY-nginx-proxy.svg
+│       │       │   └── websocket-ctn
+│       │       │       ├── 1-PROXY-websocket-ctn-1-creation-connexion.svg
+│       │       │       └── 1-PROXY-websocket-ctn-2-liaison-backend-ws.svg
+│       │       ├── 2-DATA-SERVICE
+│       │       │   ├── crud-db-conversation-ctn
+│       │       │   │   └── 2-DATA-SERVICE-crud-db-conversation-ctn-1-le-C-et-le-R-de-CRUD.svg
+│       │       │   └── message-ctn
+│       │       │       ├── 2-DATA-SERVICE-message-ctn-1-transaction.svg
+│       │       │       └── 2-DATA-SERVICE-message-ctn-2-aide-ia.svg
+│       │       ├── 3-UTILISATEURS
+│       │       │   └── 2-micro-services-gestion-ET-verification
+│       │       │       └── 3-UTILISATEURS-gestion-ET-verification-ctn.svg
+│       │       ├── 4-BDD
+│       │       │   └── 4-BDD-2-MICRO-SERVICE-postgre-ET-redis.svg
+│       │       ├── 5-FRONTEND
+│       │       │   └── 5-FRONTEND-4-fonctionnalites-interessantes.svg
+│       │       └── 6-RAG
+│       │           └── rag-ctn
+│       │               └── 6-RAG-Presentation-implémentation-rag-python.svg
+│       ├── context
+│       │   └── SecureContext.tsx
+│       ├── Dockerfile
+│       ├── head.tsx
+│       ├── middleware.ts
+│       ├── modules
+│       │   └── fonctionsCryptage.ts
+│       ├── next.config.ts
+│       ├── next-env.d.ts
+│       ├── package.json
+│       ├── package-lock.json
+│       ├── postcss.config.mjs
+│       ├── public
+│       │   ├── file.svg
+│       │   ├── globe.svg
+│       │   ├── next.svg
+│       │   ├── vercel.svg
+│       │   └── window.svg
+│       ├── README.md
+│       └── tsconfig.json
+├── 6-RAG
+│   └── rag-ctn
+│       ├── Dockerfile
+│       ├── proto
+│       │   ├── poserQuestion_pb2_grpc.py
+│       │   ├── poserQuestion_pb2.py
+│       │   ├── poserQuestion.proto
+│       │   └── __pycache__
+│       │       ├── poserQuestion_pb2.cpython-311.pyc
+│       │       └── poserQuestion_pb2_grpc.cpython-311.pyc
+│       ├── __pycache__
+│       │   ├── __init__.cpython-311.pyc
+│       │   ├── poserQuestion_pb2.cpython-311.pyc
+│       │   └── poserQuestion_pb2_grpc.cpython-311.pyc
+│       ├── requirements.txt
+│       └── server.py
+├── arbre.html
+└── docker-compose.yml
+
+79 directories, 135 files
+</pre>
+</body>
+</html>

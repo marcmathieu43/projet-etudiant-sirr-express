@@ -1,0 +1,127 @@
+services:
+  redis-ctn:
+    image: redis:latest
+    container_name: redis-ctn
+    restart: always
+    networks:
+      - sirr-network
+  postgres-db:
+    image: postgres
+    container_name: postgres-db-ctn
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: "${POSTGRES_USER}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+      POSTGRES_DB: "${POSTGRES_DB}"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - sirr-network
+
+  crud-db-conversation-ctn:
+    build:
+      context: ./2-DATA-SERVICE/crud-db-conversation-ctn
+    container_name: crud-db-conversation-ctn
+    depends_on:
+      - postgres-db
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+    networks:
+      - sirr-network
+
+  message-ctn:
+    build:
+      context: ./2-DATA-SERVICE/message-ctn
+    container_name: message-ctn
+    depends_on:
+      - postgres-db
+    networks:
+      - sirr-network
+
+  user-gestion-ctn:
+    build:
+      context: ./3-UTILISATEURS/user-gestion-ctn
+    container_name: user-gestion-ctn
+    depends_on:
+      - redis-ctn
+    networks:
+      - sirr-network
+      
+  verification-token-ctn:
+    build:
+      context: ./3-UTILISATEURS/verification-token-ctn
+    container_name: verification-token-ctn
+    depends_on:
+      - redis-ctn
+    networks:
+      - sirr-network
+
+  gateway-ctn:
+    build:
+      context: ./1-PROXY/gateway-ctn
+    container_name: gateway-ctn
+    depends_on:
+      - crud-db-conversation-ctn
+    networks:
+      - sirr-network
+
+  rag-ctn:
+    build:
+      context: ./6-RAG/rag-ctn
+    container_name: rag-ctn
+    networks:
+      - sirr-network
+
+  websocket-ctn:
+    build:
+      context: ./1-PROXY/websocket-ctn
+    container_name: websocket-ctn
+    networks:
+      - sirr-network
+
+  frontend-ctn:
+    build:
+      context: ./5-FRONTEND/frontend-ctn
+    container_name: frontend-ctn
+    depends_on:
+      - gateway-ctn
+    networks:
+      - sirr-network
+    environment:
+      - NODE_ENV=production
+
+  nginx-reverse-proxy-ctn:
+    build:
+      context: ./1-PROXY/nginx-reverse-proxy-ctn
+    container_name: nginx-reverse-proxy-ctn
+    depends_on:
+      - gateway-ctn
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /etc/letsencrypt/live/sirr.express/fullchain.pem:/etc/ssl/certs/fullchain.pem:ro
+      - /etc/letsencrypt/live/sirr.express/privkey.pem:/etc/ssl/certs/privkey.pem:ro
+
+      - /etc/letsencrypt/live/api.sirr.express/fullchain.pem:/etc/ssl/certs/api_sirr_express_fullchain.pem:ro
+      - /etc/letsencrypt/live/api.sirr.express/privkey.pem:/etc/ssl/certs/api_sirr_express_privkey.pem:ro
+
+      - /etc/letsencrypt/live/mail.sirr.express/fullchain.pem:/etc/ssl/certs/mail_sirr_express_fullchain.pem:ro
+      - /etc/letsencrypt/live/mail.sirr.express/privkey.pem:/etc/ssl/certs/mail_sirr_express_privkey.pem:ro
+
+
+
+    networks:
+      - sirr-network
+
+ 
+
+
+volumes:
+  postgres-data:
+
+networks:
+  sirr-network:
+    external: true

@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package websocket;
+option go_package = "conversation-global-ctn/message-ctn/proto;websocket";
+
+service MessageReceiver {
+  rpc SendMessage (SendMessageRequest) returns (SendMessageReply);
+}
+
+message SendMessageRequest {
+  string id = 1;
+  string conversation_id = 2;
+  string content = 3;
+  string nonce = 4;
+  string tag_element = 5;
+  string created_at = 6;
+  optional string reply_to_element_id = 7;
+  int32 vues_message = 8;
+  optional string lien = 9;
+}
+
+message SendMessageReply {
+  string status = 1;
+}

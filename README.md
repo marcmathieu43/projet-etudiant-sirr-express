@@ -7,6 +7,9 @@ Ce dépôt fait principalement office de **support aux explications détaillées
 
 J'explique en détail la **structure** et le **fonctionnement** de mon projet sur ce [lien](https://sirr.express/svg/presentation-codes.svg) :  
 Vous y trouverez un **schéma explicatif** ainsi que des détails sur le **fonctionnement de chaque micro-service**.
+Vous pourrez cliquez sur chacune des bulles représentant un micro-service, visualiser les parties les plus importantes de leur code et architecture. Et au besoin regarder son code dans ce repostery.
+
+Par exemple, vous verrez le micro-service *rag-ctn*, son code sera accessible dans 6-RAG/rag-ctn du repostery.
 
 
 ## Objectifs Pédagogiques

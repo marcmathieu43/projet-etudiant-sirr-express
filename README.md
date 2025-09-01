@@ -51,3 +51,6 @@ Parse JSON request body (Go) :
 CRUD gRPC avec Go + MongoDB :  
   https://medium.com/@techsuneel99/build-crud-grpc-server-api-client-with-golang-and-mongodb-d8b654b712f9
 
+Mistral IA RAG :
+  https://docs.mistral.ai/guides/rag/
+

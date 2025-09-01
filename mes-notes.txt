@@ -1,0 +1,176 @@
+=====================
+ Postgres DB
+=====================
+
+db-conversation :
+  user :  
+  mdp  :  
+  db   : db-conversation
+
+
+
+=====================
+ PgAdmin4
+=====================
+
+Lancer pgadmin4 :
+  sudo docker run -p 5050:80 \
+  -e PGADMIN_DEFAULT_EMAIL=marc.mathieu43@gmail.com \
+  -e PGADMIN_DEFAULT_PASSWORD=  \
+  -d dpage/pgadmin4
+
+Connexion :
+  email : marc.mathieu43@gmail.com
+  mdp   :  
+
+
+=====================
+ Docker Postgres
+=====================
+
+Run container PostgreSQL :
+  sudo docker run --name postgres-db \
+  -e POSTGRES_PASSWORD=" " \
+  -e POSTGRES_USER=" " \
+  -e POSTGRES_DB=db-conversation \
+  -p 5432:5432 \
+  -v postgres-data:/var/lib/postgresql/data \
+  -d postgres
+
+Stop/start :
+  docker stop postgres-db
+  docker start postgres-db
+
+Accès BD :
+  sudo docker exec -it postgres-db-ctn psql -U opss9_xs_h -d db-conversation
+
+Docker compose :
+  docker compose up -d
+
+
+=====================
+ GRPC CRUD Service Conversation
+=====================
+
+Commandes protoc :
+  export PATH="$(go env GOPATH)/bin:$PATH"
+  protoc --go_out=. --go-grpc_out=. --go_opt=paths=source_relative \
+         --go-grpc_opt=paths=source_relative proto/conversation.proto
+
+  protoc --go_out=. --go-grpc_out=. --go_opt=paths=source_relative \
+         --go-grpc_opt=paths=source_relative proto/token.proto
+
+Tuto étapes :
+  0. export PATH="$(go env GOPATH)/bin:$PATH"
+  1. créer tata.proto
+  2. protoc ... (voir ci-dessus)
+  3. go mod init {dossier du projet}
+  4. go mod tidy
+
+Build image :
+  docker build -t crud-db-conversation-ctn .
+
+Tests unitaires :
+  export PATH="$PATH:$(go env GOPATH)/bin" && source ~/.bashrc
+
+Exemples grpcurl :
+  grpcurl -plaintext -d '{"dureevie": 10, "nbacces":50, "media": true}' \
+    localhost:50051 conversation.gestion_conversation/CreateConversation
+
+  grpcurl -plaintext -d '{"id": "2bd18cb4-44ce-48f5-80ee-449a8b9835fc"}' \
+    localhost:50051 conversation.gestion_conversation/DeleteConversation
+
+  grpcurl -plaintext -d '{"id": "54cfac70-7333-4092-a711-443fa2de9290", "nbacces": 100}' \
+    localhost:50051 conversation.gestion_conversation/UpdateConversation
+
+  grpcurl -plaintext -d '{"id": "54cfac70-7333-4092-a711-443fa2de9290"}' \
+    localhost:50051 conversation.gestion_conversation/GetConversationById
+
+
+=====================
+ Redis
+=====================
+
+Consulter la base :
+  sudo docker compose exec redis-ctn redis-cli
+  docker exec -it redis redis-cli
+
+
+=====================
+ SQL Modifications
+=====================
+
+alter table conversations drop column created_at;
+alter table conversations drop column media;
+
+
+=====================
+ Docker Maintenance
+=====================
+
+Économiser espace :
+
+  sudo docker container prune
+  sudo docker image prune
+
+
+=====================
+ API Sirr
+=====================
+
+Get messages :
+  curl -X POST https://api.sirr.express/get-all-messages \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer MON-JETON" \
+  -d '{
+    "conversation_id": "0c9bc0aa-f0f3-4f01-9590-27ac7580a668"
+  }'
+
+Post message :
+  curl -X POST https://api.sirr.express/post-message \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer MON-JETON" \
+  -d '{
+    "conversation_id": "0008b999-c7b7-49e9-98bf-02ba1372887d",
+    "content": "Ceci est un message de test",
+    "nonce": "abcdef123456",
+    "tag_element": "example_tag",
+    "created_at": "2025-07-24T12:00:00Z"
+  }'
+
+
+=====================
+ Sites utiles
+=====================
+
+PostgreSQL + Docker bonnes pratiques :  
+  https://www.datacamp.com/fr/tutorial/postgresql-docker
+
+Rust CRUD REST API :  
+  https://dev.to/francescoxx/rust-crud-rest-api-3n45
+
+GRPC service avec Rust + Postgres :  
+  https://dev.to/steadylearner/how-to-use-grpc-with-rust-tonic-and-postgres-database-with-examples-3dl7
+
+Installer Docker sur Debian :  
+  https://docs.docker.com/engine/install/debian/
+
+Reverse proxy Nginx :  
+  https://www.hostinger.com/fr/tutoriels/reverse-proxy-nginx
+
+Websockets en Golang :  
+  https://medium.com/wisemonks/implementing-websockets-in-golang-d3e8e219733b
+
+Parse JSON request body (Go) :  
+  https://www.alexedwards.net/blog/how-to-properly-parse-a-json-request-body
+
+CRUD gRPC avec Go + MongoDB :  
+  https://medium.com/@techsuneel99/build-crud-grpc-server-api-client-with-golang-and-mongodb-d8b654b712f9
+
+
+=============== La clé de la conversation TEST de RAG
+
+OWUwOTFhMTQtMTg3ZS00YmRjLWJmMWUtNDU3ODYwNGE2NWYwOjpCUC8zWGlVRnlFbVpqcTBncDYydUloNTM4aFNqejZaR2pHVGFjYzA2UmlZPQ==
+
+
+

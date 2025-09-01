@@ -25,4 +25,29 @@ Cette application s'appuie sur **2 objectifs pédagogiques** :
 Allez **découvrir et tester cette application** : [https://sirr.express](https://sirr.express)  
 (_sirr_ signifie **secret** en arabe, et j'ai choisi l'extension **.express** pour évoquer la **rapidité** et la **fluidité** de la conversation).
 
+## Les sites qui m'ont aidés ;
+
+PostgreSQL + Docker bonnes pratiques :  
+  https://www.datacamp.com/fr/tutorial/postgresql-docker
+
+Rust CRUD REST API :  
+  https://dev.to/francescoxx/rust-crud-rest-api-3n45
+
+GRPC service avec Rust + Postgres :  
+  https://dev.to/steadylearner/how-to-use-grpc-with-rust-tonic-and-postgres-database-with-examples-3dl7
+
+Installer Docker sur Debian :  
+  https://docs.docker.com/engine/install/debian/
+
+Reverse proxy Nginx :  
+  https://www.hostinger.com/fr/tutoriels/reverse-proxy-nginx
+
+Websockets en Golang :  
+  https://medium.com/wisemonks/implementing-websockets-in-golang-d3e8e219733b
+
+Parse JSON request body (Go) :  
+  https://www.alexedwards.net/blog/how-to-properly-parse-a-json-request-body
+
+CRUD gRPC avec Go + MongoDB :  
+  https://medium.com/@techsuneel99/build-crud-grpc-server-api-client-with-golang-and-mongodb-d8b654b712f9
 

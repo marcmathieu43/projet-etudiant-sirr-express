@@ -8,7 +8,7 @@ from mistralai import Mistral
 from proto import poserQuestion_pb2, poserQuestion_pb2_grpc
 
 from getpass import getpass
-cle_api = "ZCGwmApTbZoiCQhGda9izCVNsdracSAH"
+cle_api = " "
 client = Mistral(api_key=cle_api)
 
 

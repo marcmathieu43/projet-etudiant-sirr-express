@@ -18,7 +18,7 @@ import (
 
 const (
 	port        = ":50053"
-	postgresURL = "postgresql://opss9_xs_h:G0s8MopeJ%25N%2BxIRpMA@postgres-db:5432/db-conversation?sslmode=disable"
+	postgresURL = " "
 )
 
 type server struct {
